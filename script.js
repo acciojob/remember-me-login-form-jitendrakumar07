@@ -1,14 +1,13 @@
-//your JS code here. If required.
-const loginForm = document.getElementById('loginForm');
-    const existingUserButton = document.getElementById('existing');
+const form = document.getElementById('loginForm');
+    const existingUserBtn = document.getElementById('existing');
 
-    // Check for existing user on load
+    // Check if credentials exist on page load
     if (localStorage.getItem('username')) {
-      existingUserButton.style.display = 'block';
+      existingUserBtn.style.display = 'block';
     }
 
-    loginForm.addEventListener('submit', function(event) {
-      event.preventDefault(); 
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent default form submission
 
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
@@ -18,15 +17,14 @@ const loginForm = document.getElementById('loginForm');
 
       if (rememberMe) {
         localStorage.setItem('username', username);
-        localStorage.setItem('password', password); 
-        existingUserButton.style.display = 'block';
+        localStorage.setItem('password', password); // Consider security implications
       } else {
         localStorage.removeItem('username');
         localStorage.removeItem('password');
-        existingUserButton.style.display = 'none';
       }
     });
-existingUserButton.addEventListener('click', function() {
+
+    existingUserBtn.addEventListener('click', () => {
       const savedUsername = localStorage.getItem('username');
       alert(`Logged in as ${savedUsername}`);
     });
